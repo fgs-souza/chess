@@ -12,7 +12,18 @@ public class Square{
 	}
 
 	public boolean containsEnemyPiece(int team){
-		return piece.getTeam() != team ? true : false;
+		if(piece == null)
+			return false;
+
+		return piece.getTeam() != team;
+	}
+
+
+	public boolean contaisAllyPiece(int team){
+		if(piece == null)
+			return false;
+		
+		return piece.getTeam() == team;
 	}
 
 	public Piece getPiece(){

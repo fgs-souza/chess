@@ -64,11 +64,7 @@ public class Game{
 				board[row][col] = new Square();
 
 				if (row == 1 || row == 6)
-					board[row][col].setPiece(new Pawn(team));
-
-				if (row == 0 || row == 7)
-					board[row][col].setPiece(new Rook(team));
-
+					board[row][col].setPiece(new Bishop(team));
 
 			}
 		}
@@ -104,12 +100,19 @@ public class Game{
 
 				String team = (currSquare.getPiece().getTeam() == 0) ? "W" : "B";
 
-				if(board[row][col].getPiece().getValue() == 1)
-					System.out.printf("P" + team);
-				else if(board[row][col].getPiece().getValue() == 5)
-					System.out.printf("R" + team);
+				switch(board[row][col].getPiece().getValue()){
+					case 1:
+						System.out.printf("P");
+						break;
+					case 3:
+						System.out.printf("B");
+						break;
+					case 5:
+						System.out.printf("R");
+						break;
+				}
 
-				System.out.printf(" ");
+				System.out.printf(team + " ");
 			}
 			System.out.println();
 		}

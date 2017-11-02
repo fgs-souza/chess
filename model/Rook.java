@@ -10,21 +10,26 @@ public class Rook extends Piece{
 
 	public boolean canMove(int rowIni, int colIni, int rowTarg, int colTarg, Square[][] board){
 
-
+		// Retorna falso se o movimento não for ou na mesma linha ou na mesma coluna
 		if(!(colTarg == colIni ^ rowTarg == rowIni))
 			return false;
 
+		// Proximo passo: descobrir se possui peça aliada no caminho:
+
+		// Descobre se o movimento é vertical ou horizontal para decidir se itera sobre colunas ou linhas
 		boolean isVertical = colIni == colTarg;
 
-
-		int moveLineIni = isVertical ? rowIni : colIni;
+		int moveLineIni = isVertical ? rowIni : colIni; 
 		int moveLineTarg = isVertical ? rowTarg : colTarg;
 
+		// Descobre se o movimento é (cima->baixo) ou o contrário, para saber em que direção iterar
+		// No movimento vertical, considera-se esquerda como cima e direito como baixo
 		boolean movingDown = moveLineTarg > moveLineIni;
 
 		int upper = movingDown ? moveLineTarg : moveLineIni-1;
 		int lower = movingDown ? moveLineIni+1 : moveLineTarg;
 
+		// Itera pelo caminho a ser percorrido e determina se existe peça aliada
 		for(int i = lower; i <= upper; i++){
 			Square square = isVertical ? board[i][colIni] : board[rowTarg][i];
 
