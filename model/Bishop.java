@@ -10,8 +10,6 @@ public class Bishop extends Piece{
 
 	public boolean canMove(int rowIni, int colIni, int rowTarg, int colTarg, Square[][] board){
 
-		Square target = board[rowTarg][colTarg];
-
 		if(!isDiagonal(rowIni, colIni, rowTarg, colTarg))
 			return false;
 
@@ -57,9 +55,10 @@ public class Bishop extends Piece{
 					cond4 = col > colTarg;
 				}
 
+				boolean isInPath = cond1 && cond2 && cond3 && cond4;
 
-				if(isDiagonal(rowIni, colIni, row, col) && cond1 && cond2 && cond3 && cond4
-					&& !board[row][col].isEmpty() && !board[row][col].containsEnemyPiece(team))
+
+				if(isDiagonal(rowIni, colIni, row, col) && isInPath && board[row][col].containsAllyPiece(team))
 					return true;
 			}
 		}

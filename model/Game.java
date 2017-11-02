@@ -56,19 +56,12 @@ public class Game{
 
 		int team = 0;
 		for(int row = 0; row < 8; row++){
-			if(row == 3)
-				team = 1;	
-
 			for(int col = 0; col < 8; col++){
-
 				board[row][col] = new Square();
-
-				if (row == 1 || row == 6)
-					board[row][col].setPiece(new Bishop(team));
-
 			}
 		}
 
+		board[4][4].setPiece(new Queen(0));
 
 	}
 
@@ -109,6 +102,12 @@ public class Game{
 						break;
 					case 5:
 						System.out.printf("R");
+						break;
+					case 10:
+						System.out.printf("Q");
+						break;
+					case 100:
+						System.out.printf("K");
 						break;
 				}
 

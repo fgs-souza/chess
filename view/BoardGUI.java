@@ -25,7 +25,7 @@ public class BoardGUI extends JFrame{
 				temp.setBackground(Color.BLACK);
 			}	
 			panel.add(temp);
-		}
+		}s
 	}
 
 	public static void main(String[] args){

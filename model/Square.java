@@ -19,7 +19,7 @@ public class Square{
 	}
 
 
-	public boolean contaisAllyPiece(int team){
+	public boolean containsAllyPiece(int team){
 		if(piece == null)
 			return false;
 		

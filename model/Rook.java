@@ -23,7 +23,7 @@ public class Rook extends Piece{
 		int moveLineTarg = isVertical ? rowTarg : colTarg;
 
 		// Descobre se o movimento é (cima->baixo) ou o contrário, para saber em que direção iterar
-		// No movimento vertical, considera-se esquerda como cima e direito como baixo
+		// No movimento vertical, considera-se esquerda como cima e direita como baixo
 		boolean movingDown = moveLineTarg > moveLineIni;
 
 		int upper = movingDown ? moveLineTarg : moveLineIni-1;
@@ -33,7 +33,7 @@ public class Rook extends Piece{
 		for(int i = lower; i <= upper; i++){
 			Square square = isVertical ? board[i][colIni] : board[rowTarg][i];
 
-			if(!square.isEmpty() && !square.containsEnemyPiece(team))
+			if(square.containsAllyPiece(team))
 				return false;
 		}
 

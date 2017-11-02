@@ -15,12 +15,12 @@ public class Pawn extends Piece{
 
 		Square target = board[rowTarg][colTarg];
 
-		if(target.isEmpty()){
+		if(target.isEmpty()){ // Caso de movimento sem captura
 
 			if(colIni != colTarg) // sem captura, peoes so podem se mover na mesa coluna
 				return false;
 
-			if(team == 0){ // dependendo do time, podem andar para cima ou para baixo
+			if(team == 0){ // peoes só podem se movimentar em uma direção, dependendo do seu time
 				if((rowTarg <= rowIni) || rowTarg > rowIni+maxSteps)
 					return false;
 			}else{
@@ -31,10 +31,10 @@ public class Pawn extends Piece{
 		}else{
 			if(target.containsEnemyPiece(team)){
 				if(team == 0){
-					if(rowTarg != rowIni+1 || colTarg != colIni+1) //para captura, peoes so podem se mover 1 passo na diagonal
+					if(rowTarg != rowIni+1 || colTarg != colIni+1) //para captura, peoes só podem se mover 1 passo na diagonal
 						return false;
 				} else{
-					if(rowTarg != rowIni-1 || colTarg != colIni-1) //para captura, peoes so podem se mover 1 passo na diagonal
+					if(rowTarg != rowIni-1 || colTarg != colIni-1) //para captura, peoes só podem se mover 1 passo na diagonal
 						return false;
 				}
 			}else{
@@ -52,6 +52,8 @@ public class Pawn extends Piece{
 		Game game = new Game();
 
 		Square[][] board = game.getBoard();
+
+		System.out.println("tests: ");
 
 		System.out.println("Consegue se mover 2 para frente no primeiro turno: " + board[1][0].getPiece().canMove(1, 0, 3, 0, board));
 		game.movePiece(1, 0, 3, 0);
