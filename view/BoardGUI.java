@@ -1,14 +1,17 @@
 package view;
+import model.*;	
 
 import javax.swing.*;
 import java.awt.*;
 
 public class BoardGUI extends JFrame{
 
-	Board board;
+	Game game;
 
 
-	public BoardGUI(Board board;){
+	public BoardGUI(){
+
+		//Square[][] board = game.getBoard();
 
 		JPanel panel = new JPanel();
 		//JLabel xadrez = new JLabel("Xadrez:");
@@ -25,7 +28,7 @@ public class BoardGUI extends JFrame{
 				temp.setBackground(Color.BLACK);
 			}	
 			panel.add(temp);
-		}s
+		}
 	}
 
 	public static void main(String[] args){

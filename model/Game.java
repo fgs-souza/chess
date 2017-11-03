@@ -5,18 +5,18 @@ public class Game{
 
 	private Square[][] board;
 
-/*
-	Board(){
+	Game(){
 		board = new Square[8][8];
 
 		for(int row = 0; row < 8; row++){
-			for(int col = 0; col < 8; col++){
 
-				int team = (col < 3) ? 0 : 1;
+			int team = (row < 3) ? 0 : 1;
+
+			for(int col = 0; col < 8; col++){
 
 				board[row][col] = new Square();
 
-				if(col == 0 || col == 7)
+				if(row == 0 || row == 7)
 				{
 					switch(col){
 						case 0:
@@ -39,31 +39,16 @@ public class Game{
 							break;
 					}
 
-				} else if (col == 1 || col == 6)
+				} else if (row == 1 || row == 6)
 					board[row][col].setPiece(new Pawn(team));
 				else
 					board[row][col].setPiece(null);
 
-
 			}
 		}
 	}
-	*/
 
-	Game(){
-
-		board = new Square[8][8];
-
-		int team = 0;
-		for(int row = 0; row < 8; row++){
-			for(int col = 0; col < 8; col++){
-				board[row][col] = new Square();
-			}
-		}
-
-		board[4][4].setPiece(new Queen(0));
-
-	}
+	
 
 	public void movePiece(int row1, int col1, int row2, int col2){
 		Piece moving = board[row1][col1].getPiece();
@@ -99,6 +84,9 @@ public class Game{
 						break;
 					case 3:
 						System.out.printf("B");
+						break;
+					case 4:
+						System.out.print("C");
 						break;
 					case 5:
 						System.out.printf("R");

@@ -13,7 +13,10 @@ public class Bishop extends Piece{
 		if(!isDiagonal(rowIni, colIni, rowTarg, colTarg))
 			return false;
 
-		if(pathContainsAlly(rowIni, colIni, rowTarg, colTarg, board))
+		if(pathContainsPiece(rowIni, colIni, rowTarg, colTarg, board))
+			return false;
+
+		if(board[rowTarg][colTarg].containsAllyPiece(team))
 			return false;
 
 		
@@ -29,7 +32,7 @@ public class Bishop extends Piece{
 		return false;
 	}
 
-	private boolean pathContainsAlly(int rowIni, int colIni, int rowTarg, int colTarg, Square[][] board){
+	private boolean pathContainsPiece(int rowIni, int colIni, int rowTarg, int colTarg, Square[][] board){
 
 
 		boolean movingRight = colTarg > colIni;
@@ -37,6 +40,7 @@ public class Bishop extends Piece{
 
 		for(int row = 0; row < 8; row++){
 			for(int col = 0; col < 8; col++){
+
 				boolean cond1, cond2, cond3, cond4;
 
 				if(movingDown){
@@ -58,7 +62,7 @@ public class Bishop extends Piece{
 				boolean isInPath = cond1 && cond2 && cond3 && cond4;
 
 
-				if(isDiagonal(rowIni, colIni, row, col) && isInPath && board[row][col].containsAllyPiece(team))
+				if(isDiagonal(rowIni, colIni, row, col) && isInPath && !board[row][col].isEmpty())
 					return true;
 			}
 		}
@@ -74,17 +78,12 @@ public class Bishop extends Piece{
 		game.printBoard();
 
 		Square[][] board = game.getBoard();
-		System.out.println(board[1][0].getPiece().canMove(1, 0, 4, 3, board));
-		game.movePiece(1, 0, 4, 3);
+		System.out.println(board[1][0].getPiece().canMove(0, 0, 2, 2, board));
 		game.printBoard();
-		System.out.println(board[4][3].getPiece().canMove(4, 3, 2, 5, board));
-		game.movePiece(4, 3, 2, 5);
+		game.movePiece(0,0,4,4);
 		game.printBoard();
-		System.out.println(board[2][5].getPiece().canMove(2, 5, 0, 3, board));
-		game.movePiece(2,5,1,0);
-		game.movePiece(1,2,0,1);
-		game.printBoard();
-		System.out.println(board[0][1].getPiece().canMove(0, 1, 3, 4, board));
+		System.out.println(board[4][4].getPiece().canMove(4, 4, 1, 1, board));
+
 
 	}
 
