@@ -32,38 +32,21 @@ public class Bishop extends Piece{
 		return false;
 	}
 
-	private boolean pathContainsPiece(int rowIni, int colIni, int rowTarg, int colTarg, Square[][] board){
-
-
+	private boolean pathContainsPiece(int rowIni, int colIni, int rowTarg, int colTarg, Square[][] board){  // Checa se existe alguma peça no caminho de board[rowIni][colIni]
+																											// até board[rowTarg][colTarg], excludente.
 		boolean movingRight = colTarg > colIni;
 		boolean movingDown = rowTarg > rowIni;
+
+		int signal = (movingRight ^ movingDown) ? 1 : -1;
 
 		for(int row = 0; row < 8; row++){
 			for(int col = 0; col < 8; col++){
 
-				boolean cond1, cond2, cond3, cond4;
+				if(row+col*signal == rowIni+colIni*signal){
+					if(!board[row][col].isEmpty())
+						return true;
 
-				if(movingDown){
-					cond1 = row > rowIni;
-					cond3 = row < rowTarg;
-				}else{
-					cond1 = row < rowIni;
-					cond3 = row > rowTarg;
 				}
-
-				if(movingRight){
-					cond2 = col > colIni;
-					cond4 = col < colTarg;
-				} else{
-					cond2 = col < colIni;
-					cond4 = col > colTarg;
-				}
-
-				boolean isInPath = cond1 && cond2 && cond3 && cond4;
-
-
-				if(isDiagonal(rowIni, colIni, row, col) && isInPath && !board[row][col].isEmpty())
-					return true;
 			}
 		}
 
@@ -78,11 +61,16 @@ public class Bishop extends Piece{
 		game.printBoard();
 
 		Square[][] board = game.getBoard();
-		System.out.println(board[1][0].getPiece().canMove(0, 0, 2, 2, board));
+
+		System.out.println(board[0][2].getPiece().canMove(0,2,2,4,board));
+		game.movePiece(0,2,4,4);
 		game.printBoard();
-		game.movePiece(0,0,4,4);
-		game.printBoard();
-		System.out.println(board[4][4].getPiece().canMove(4, 4, 1, 1, board));
+		System.out.println("true: " + board[4][4].getPiece().canMove(4,4,2,2,board));
+		System.out.println("false: " + board[4][4].getPiece().canMove(4,4,1,1,board));
+		System.out.println("true: " + board[4][4].getPiece().canMove(4,4,6,6,board));
+		System.out.println("false: " + board[4][4].getPiece().canMove(4,4,7,7,board));
+		System.out.println("false: " + board[4][4].getPiece().canMove(4,4,5,4,board));
+		System.out.println("true: " + board[4][4].getPiece().canMove(4,4,6,2,board));
 
 
 	}

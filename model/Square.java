@@ -8,7 +8,7 @@ public class Square{
 		if(piece == null){
 			return true;
 		}
-		return false;x
+		return false;
 	}
 
 	public boolean containsEnemyPiece(int team){
