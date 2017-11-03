@@ -34,22 +34,31 @@ public class Bishop extends Piece{
 
 	private boolean pathContainsPiece(int rowIni, int colIni, int rowTarg, int colTarg, Square[][] board){  // Checa se existe alguma peça no caminho de board[rowIni][colIni]
 																											// até board[rowTarg][colTarg], excludente.
+		// Determina se o movimento é para cima ou para baixo
 		boolean movingRight = colTarg > colIni;
 		boolean movingDown = rowTarg > rowIni;
 
-		int signal = (movingRight ^ movingDown) ? 1 : -1;
+		// Determina se é uma diagonal na direção principal ou secundária
+		int diagonal = (movingRight ^ movingDown) ? 1 : -1;
 
-		for(int row = 0; row < 8; row++){
+		// Determina de que linha à que linha o bispo irá se mover
+		int lower = movingDown ? rowIni+1 : rowIni-1;
+		int upper = movingDown ? rowTarg-1 : rowTarg+1;
+
+		// Itera pelas linhas que ele irá se mover e compara a soma/diferença da linha e coluna (baseado na diagonal)
+		// para descobrir se pertence ao caminho do movimento da peça. Se pertencer e possuir uma peça no quadrado, retorna true
+		for(int row = lower; row <= upper; row++){
 			for(int col = 0; col < 8; col++){
 
-				if(row+col*signal == rowIni+colIni*signal){
+				if(rowIni+colIni*diagonal == row+col*diagonal){
 					if(!board[row][col].isEmpty())
 						return true;
-
 				}
 			}
 		}
 
+
+		// Passou pelos testes, retorna false
 		return false;
 	}
 
@@ -71,6 +80,7 @@ public class Bishop extends Piece{
 		System.out.println("false: " + board[4][4].getPiece().canMove(4,4,7,7,board));
 		System.out.println("false: " + board[4][4].getPiece().canMove(4,4,5,4,board));
 		System.out.println("true: " + board[4][4].getPiece().canMove(4,4,6,2,board));
+		System.out.println("false: " + board[4][4].getPiece().canMove(4,4,7,1,board));
 
 
 	}
