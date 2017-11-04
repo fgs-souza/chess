@@ -24,6 +24,42 @@ public class King extends Piece{
 		return true;	
 	}
 
+	public boolean isChecked(int kingRow, int kingCol, Square[][] board){
+
+		for(int row = 0; row < 8; row++){
+			for(int col = 0; col < 8; col++){
+
+				if(board[row][col].containsEnemyPiece(team)){
+					if(board[row][col].getPiece().canMove(row, col, kingRow, kingCol, board))
+						return true;
+				}
+
+
+			}
+		}
+
+		return false;
+	}
+
+	public boolean isCheckmate(int kingRow, int kingCol, Square[][] board){
+
+		
+		if(!isChecked(kingRow, kingCol, board))
+			return false;		
+
+		for(int row = 0; row < 8; row++){
+			for(int col = 0; col < 8; col++){
+				if(canMove(kingRow, kingCol, row, col, board))
+					if(!isChecked(row, col, board))
+						return false;
+
+
+			}
+		}
+
+		return true;
+	}
+
 	public static void main(String[] args){
 
 		Game game = new Game();

@@ -4,9 +4,21 @@ import java.util.Arrays;
 public class Game{
 
 	private Square[][] board;
+	private Player playerWhite;
+	private Player playerBlack;
+	private King whiteKing;
+	private King blackKing;
 
-	Game(){
+	public Game(Player playerWhite, Player playerBlack){
 		board = new Square[8][8];
+		this.playerWhite = playerWhite;
+		this.playerBlack = playerBlack;
+
+		whiteKing = new King(0);
+		blackKing = new King(1);
+
+		board[0][4].setPiece(whiteKing);
+		board[7][4].setPiece(blackKing);
 
 		for(int row = 0; row < 8; row++){
 
@@ -35,7 +47,6 @@ public class Game{
 							board[row][col].setPiece(new Queen(team));
 							break;
 						case 4:
-							board[row][col].setPiece(new King(team));
 							break;
 					}
 
@@ -61,6 +72,21 @@ public class Game{
 
 	public Square[][] getBoard(){
 		return board;
+	}
+
+	public int status(){ // Retorna -1 se o jogo ainda não acabou, 0 se acabou e o time branco venceu, 
+						 // 1 se acabou e o time preto venceu, 2 se acabou em empate.
+
+		boolean whiteCheckmate = false;
+		boolean blackHasKing = false;
+
+		for(int row = 0; row < 8; row++){
+			for(int col = 0; col < 8; col++){
+				if(board[row][col].getPiece().getValue() == )
+			}
+		}
+
+		return -1;
 	}
 
 

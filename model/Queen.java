@@ -10,6 +10,8 @@ public class Queen extends Piece{
 
 	public boolean canMove(int rowIni, int colIni, int rowTarg, int colTarg, Square[][] board){
 
+		// Movimento da rainha é a composição dos movimentos da torre e do bispo
+
 		Rook queenRook = new Rook(team);
 		Bishop queenBishop = new Bishop(team);
 
