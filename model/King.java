@@ -21,6 +21,9 @@ public class King extends Piece{
 		if(rowDiff > 1 || colDiff > 1)
 			return false;
 
+		if(isChecked(rowTarg, colTarg, board))
+			return false;
+
 		return true;	
 	}
 
@@ -41,7 +44,7 @@ public class King extends Piece{
 		return false;
 	}
 
-	public boolean isCheckmate(int kingRow, int kingCol, Square[][] board){
+	public boolean isCheckmated(int kingRow, int kingCol, Square[][] board){
 
 		
 		if(!isChecked(kingRow, kingCol, board))
@@ -62,7 +65,10 @@ public class King extends Piece{
 
 	public static void main(String[] args){
 
-		Game game = new Game();
+		Player p1 = new Player("");
+		Player p2 = new Player("");
+		
+		Game game = new Game(p1,p2);
 
 		Square[][] board = game.getBoard();
 

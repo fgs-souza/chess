@@ -18,7 +18,8 @@ public class GameControl{
 		game.printBoard();
 
 		int currentPlayer = 0;
-		while(true){
+
+		game: while(true){
 
 			Square[][] board = game.getBoard();
 
@@ -55,10 +56,10 @@ public class GameControl{
 				case 0:
 				case 1:
 					System.out.println("Checkmate!");
-					break;
+					break game;
 				case 2:
 					System.out.println("Não é mais possível ganhar! Empate.");
-					break;
+					break game;
 			}
 
 

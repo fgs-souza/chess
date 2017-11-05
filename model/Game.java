@@ -6,19 +6,11 @@ public class Game{
 	private Square[][] board;
 	private Player playerWhite;
 	private Player playerBlack;
-	private King whiteKing;
-	private King blackKing;
 
 	public Game(Player playerWhite, Player playerBlack){
 		board = new Square[8][8];
 		this.playerWhite = playerWhite;
 		this.playerBlack = playerBlack;
-
-		whiteKing = new King(0);
-		blackKing = new King(1);
-
-		board[0][4].setPiece(whiteKing);
-		board[7][4].setPiece(blackKing);
 
 		for(int row = 0; row < 8; row++){
 
@@ -47,6 +39,7 @@ public class Game{
 							board[row][col].setPiece(new Queen(team));
 							break;
 						case 4:
+							board[row][col].setPiece(new King(team));
 							break;
 					}
 
@@ -75,15 +68,44 @@ public class Game{
 	}
 
 	public int status(){ // Retorna -1 se o jogo ainda não acabou, 0 se acabou e o time branco venceu, 
-						 // 1 se acabou e o time preto venceu, 2 se acabou em empate.
+						 // 1 se acabou e o time preto venceu, ((2 se acabou em empate)) - a ser implementado.
 
-		boolean whiteCheckmate = false;
+		boolean whiteHasKing = false;
 		boolean blackHasKing = false;
 
 		for(int row = 0; row < 8; row++){
 			for(int col = 0; col < 8; col++){
-				if(board[row][col].getPiece().getValue() == )
+
+				if(!board[row][col].isEmpty()){
+					Piece piece = board[row][col].getPiece();
+
+					if(piece.getValue() == 100){
+
+					int pieceTeam = piece.getTeam();
+
+					if(pieceTeam == 0)
+						whiteHasKing = true;
+					else if(pieceTeam == 1)
+						blackHasKing = true;
+
+
+					/*if(piece.isCheckmated(row, col, board))
+						return (piece.getTeam() + 1) %2*/
+					}
+				}
 			}
+		}
+
+		if(!whiteHasKing){
+			playerWhite.won();
+			playerBlack.lost();
+			return 1;
+		}
+
+		if(!blackHasKing){
+			playerWhite.lost();
+			playerBlack.won();
+			return 0;
 		}
 
 		return -1;
@@ -112,7 +134,7 @@ public class Game{
 						System.out.printf("B");
 						break;
 					case 4:
-						System.out.print("C");
+						System.out.printf("C");
 						break;
 					case 5:
 						System.out.printf("R");
