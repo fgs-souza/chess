@@ -4,13 +4,16 @@ import java.util.Arrays;
 public class Game{
 
 	private Square[][] board;
+	private int currentTeam ;
 	private Player playerWhite;
 	private Player playerBlack;
 
 	public Game(Player playerWhite, Player playerBlack){
+
 		board = new Square[8][8];
 		this.playerWhite = playerWhite;
 		this.playerBlack = playerBlack;
+		currentTeam = 0;
 
 		for(int row = 0; row < 8; row++){
 
@@ -56,20 +59,27 @@ public class Game{
 
 	public void movePiece(int row1, int col1, int row2, int col2){
 		Piece moving = board[row1][col1].getPiece();
-		int currTeam = moving.getTeam();
+		
 
 		board[row2][col2].setPiece(moving);
 		board[row1][col1].setPiece(null);
-		moving.moved();
 	}
 
 	public Square[][] getBoard(){
 		return board;
 	}
 
+	public void nextTurn(){
+		currentTeam = (currentTeam+1) % 2;
+	}
+
+	public int getCurrentTeam(){
+		return currentTeam;
+	}
+
 	public int status(){ // Retorna -1 se o jogo ainda não acabou, 0 se acabou e o time branco venceu, 
 						 // 1 se acabou e o time preto venceu, ((2 se acabou em empate)) - a ser implementado.
-
+/*
 		boolean whiteHasKing = false;
 		boolean blackHasKing = false;
 
@@ -77,6 +87,7 @@ public class Game{
 			for(int col = 0; col < 8; col++){
 
 				if(!board[row][col].isEmpty()){
+
 					Piece piece = board[row][col].getPiece();
 
 					if(piece.getValue() == 100){
@@ -89,8 +100,8 @@ public class Game{
 						blackHasKing = true;
 
 
-					/*if(piece.isCheckmated(row, col, board))
-						return (piece.getTeam() + 1) %2*/
+					if(piece.isCheckmated(row, col, board))
+						return (piece.getTeam() + 1) %2;
 					}
 				}
 			}
@@ -107,7 +118,7 @@ public class Game{
 			playerBlack.won();
 			return 0;
 		}
-
+*/
 		return -1;
 	}
 

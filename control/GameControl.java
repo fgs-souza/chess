@@ -17,19 +17,17 @@ public class GameControl{
 
 		game.printBoard();
 
-		int currentPlayer = 0;
-
 		game: while(true){
 
 			Square[][] board = game.getBoard();
 
-			String currentTeam = currentPlayer == 0 ? "White" : "Black";
+			String currentTeam = game.getCurrentTeam() == 0 ? "White" : "Black";
 			System.out.println(currentTeam + " turn. Type the row, then column of the piece you want to move: ");
 
 			int rowIni = s.nextInt();
 			int colIni = s.nextInt();
 
-			if(board[rowIni][colIni].containsAllyPiece(currentPlayer)){
+			if(board[rowIni][colIni].containsAllyPiece(game.getCurrentTeam())){
 				System.out.println("Peça selecionada. Agora, digite a row e a column para que deseja movê-la: ");
 
 				int rowTarg = s.nextInt();
@@ -51,7 +49,7 @@ public class GameControl{
 			switch(game.status()){
 				case -1:
 					game.printBoard();
-					currentPlayer = (currentPlayer+1) % 2;
+					game.nextTurn();
 					break;
 				case 0:
 				case 1:

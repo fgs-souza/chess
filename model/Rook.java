@@ -44,7 +44,7 @@ public class Rook extends Piece{
 	}
 
 
-	public static void main(String[] args){
+	/*public static void main(String[] args){
 
 		Game game = new Game();
 
@@ -74,5 +74,5 @@ public class Rook extends Piece{
 		System.out.println(board[3][0].getPiece().canMove(3, 0, 3, 3, board));
 		System.out.println(board[3][0].getPiece().canMove(3, 0, 3, 4, board));
 
-	}
+	}*/
 }
