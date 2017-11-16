@@ -63,14 +63,11 @@ public class Game{
 
 		board[row2][col2].setPiece(moving);
 		board[row1][col1].setPiece(null);
+		currentTeam = (currentTeam+1) % 2;
 	}
 
 	public Square[][] getBoard(){
 		return board;
-	}
-
-	public void nextTurn(){
-		currentTeam = (currentTeam+1) % 2;
 	}
 
 	public int getCurrentTeam(){

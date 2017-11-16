@@ -11,7 +11,7 @@ public class Pawn extends Piece{
 
 	public boolean canMove(int rowIni, int colIni, int rowTarg, int colTarg, Square[][] board){
 
-		int maxSteps = hasMoved ? 1 : 2; // podem se mover 2 passos na primeira vez que se movem
+		int maxSteps = hasMoved ? 1 : 2; // podem se mover 2 passos na primeira vez que se movems
 
 		Square target = board[rowTarg][colTarg];
 
@@ -28,13 +28,13 @@ public class Pawn extends Piece{
 					return false;
 			}
 
-		}else{
-			if(target.containsEnemyPiece(team)){
+		}else{ // Movimento com captura
+			if(target.containsEnemyPiece(team) && Math.abs(colTarg - colIni) == 1){ // para capturar, precisa de peça inimiga e apenas 1 coluna de diferença
 				if(team == 0){
-					if(rowTarg != rowIni+1 || colTarg != colIni+1) //para captura, peoes só podem se mover 1 passo na diagonal
+					if(rowTarg != rowIni+1)
 						return false;
 				} else{
-					if(rowTarg != rowIni-1 || colTarg != colIni-1) //para captura, peoes só podem se mover 1 passo na diagonal
+					if(rowTarg != rowIni-1)
 						return false;
 				}
 			}else{

@@ -49,7 +49,6 @@ public class GameControl{
 			switch(game.status()){
 				case -1:
 					game.printBoard();
-					game.nextTurn();
 					break;
 				case 0:
 				case 1:

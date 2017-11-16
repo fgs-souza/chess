@@ -91,6 +91,77 @@ public class BoardGUI extends JFrame{
 	}
 
 	private class BoardListener implements MouseListener{
+
+		int selectedRow, selectedCol;
+
+		public BoardListener(){
+
+		}
+
+
+		public void mousePressed(MouseEvent e) {
+													       
+	    }
+
+	    public void mouseReleased(MouseEvent e) {
+	       
+	    }
+
+	    public void mouseEntered(MouseEvent e) {
+	      
+	    }
+
+	    public void mouseExited(MouseEvent e) {
+	      
+	    }
+
+	    public void mouseClicked(MouseEvent e) {
+
+	    	int row = e.getY()/(getHeight()/8) % (getHeight()/8); 
+	    	int col = e.getX()/(getWidth()/8) % (getWidth()/8); 
+
+	    	if(row > 7 || row < 0 || col > 7 || col < 0)
+	    		return;
+
+	    	Color BGColor = boardLabel[row][col].getBackground();
+			
+
+			if(BGColor != Color.GREEN && BGColor != Color.RED){
+
+				if(board[row][col].isEmpty())
+					return;
+
+				resetBoard();
+				selectedRow = row;
+				selectedCol = col;
+				
+				Piece peca = board[row][col].getPiece();
+
+			   	for(int a = 0; a < 8; a++){
+
+			   		for(int b = 0; b < 8; b++){
+
+			       		if(peca.canMove(row,col,a,b,board) && peca.getTeam() == game.getCurrentTeam()){
+
+			       			if(board[a][b].containsEnemyPiece(game.getCurrentTeam()))
+			       				boardLabel[a][b].setBackground(Color.RED);
+			       			else
+			       				boardLabel[a][b].setBackground(Color.GREEN);
+
+			       		}
+			       		
+
+			   		}
+			   	}
+			}else{
+				game.movePiece(selectedRow,selectedCol,row,col);
+				resetBoard();
+
+			}
+	    	
+
+		}
+
 		
 	}
 
