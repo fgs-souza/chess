@@ -32,6 +32,7 @@ public class BoardGUI extends JFrame{
 		add(panel);
 
 		resetBoard();
+		addMouseListener(new BoardListener());
 	}
 
 	public static void main(String[] args){
@@ -84,114 +85,13 @@ public class BoardGUI extends JFrame{
 					boardLabel[i][j].setText("");
 				}
 
-				boardLabel[i][j].addMouseListener(new ListenerBase(i,j));
-
 			}
 		}
 
 	}
 
-	public class ListenerBase implements MouseListener {
-
-		int row, col;
-
-		public ListenerBase(int row, int col){
-			this.row = row;
-			this.col = col;
-
-		}
-
-		public void mousePressed(MouseEvent e) {
-													       
-	    }
-
-	    public void mouseReleased(MouseEvent e) {
-	       
-	    }
-
-	    public void mouseEntered(MouseEvent e) {
-	      
-	    }
-
-	    public void mouseExited(MouseEvent e) {
-	      
-	    }
-
-	    public void mouseClicked(MouseEvent e) {
-
-			
-			if(board[row][col].isEmpty())
-				return;
-
-			
-			Piece peca = board[row][col].getPiece();
-
-			resetBoard();
-
-		   	for(int a = 0; a < 8; a++){
-
-		   		for(int b = 0; b < 8; b++){
-
-		       		if(peca.canMove(row,col,a,b,board) && peca.getTeam() == game.getCurrentTeam()){
-
-		       			boardLabel[a][b].setBackground(Color.GREEN);
-
-		       			for(MouseListener al : boardLabel[a][b].getMouseListeners())
-		       				boardLabel[a][b].removeMouseListener(al);
-
-		       		}
-		       		
-
-		   		}
-		   	}	
-	    	
-
-		}
-
-	}
-
-	public class ListenerVerde implements MouseListener{
+	private class BoardListener implements MouseListener{
 		
-		int row1, col1, row2, col2;
-
-		public ListenerVerde(int row1, int col1, int row2, int col2){
-			this.row1 = row1;
-			this.col1 = col1;
-			this.row2 = row2;
-			this.col2 = col2;
-
-		}
-
-		public void mousePressed(MouseEvent e) {
-													       
-	    }
-
-	    public void mouseReleased(MouseEvent e) {
-	       
-	    }
-
-	    public void mouseEntered(MouseEvent e) {
-	      
-	    }
-
-	    public void mouseExited(MouseEvent e) {
-	      
-	    }
-
-	    public void mouseClicked(MouseEvent e) {
-
-			if(board[row1][col1].isEmpty())
-				return;
-
-		
-			Piece peca = board[row1][col1].getPiece();
-
-			game.movePiece(row1,col1,row2,col2);
-			game.nextTurn();
-
-			resetBoard();
-
-		}		
 	}
 
 
