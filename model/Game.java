@@ -55,15 +55,9 @@ public class Game{
 		}
 	}
 
-	
+	public Game(){
 
-	public void movePiece(int row1, int col1, int row2, int col2){
-		Piece moving = board[row1][col1].getPiece();
-		moving.moved();
-
-		board[row2][col2].setPiece(moving);
-		board[row1][col1].setPiece(null);
-		currentTeam = (currentTeam+1) % 2;
+		this(new Player("Default p1"), new Player("Default p2"));
 	}
 
 	public Square[][] getBoard(){
@@ -72,6 +66,15 @@ public class Game{
 
 	public int getCurrentTeam(){
 		return currentTeam;
+	}
+
+	public void movePiece(int row1, int col1, int row2, int col2){
+		Piece moving = board[row1][col1].getPiece();
+		moving.moved();
+
+		board[row2][col2].setPiece(moving);
+		board[row1][col1].setPiece(null);
+		currentTeam = (currentTeam+1) % 2;
 	}
 
 	public int status(){ // Retorna -1 se o jogo ainda não acabou, 0 se acabou e o time branco venceu, 
@@ -119,45 +122,4 @@ public class Game{
 		return -1;
 	}
 
-
-	public void printBoard(){
-
-		for(int row = 0; row < 8; row++){
-			for(int col = 0; col < 8; col++){
-
-				if(board[row][col].isEmpty()){
-					System.out.printf(" . ");
-					continue;
-				}
-
-				Square currSquare = board[row][col];
-
-				String team = (currSquare.getPiece().getTeam() == 0) ? "W" : "B";
-
-				switch(board[row][col].getPiece().getValue()){
-					case 1:
-						System.out.printf("P");
-						break;
-					case 3:
-						System.out.printf("B");
-						break;
-					case 4:
-						System.out.printf("C");
-						break;
-					case 5:
-						System.out.printf("R");
-						break;
-					case 10:
-						System.out.printf("Q");
-						break;
-					case 100:
-						System.out.printf("K");
-						break;
-				}
-
-				System.out.printf(team + " ");
-			}
-			System.out.println();
-		}
-	}
 }

@@ -5,31 +5,27 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class BoardGUI extends JFrame{
+public class BoardPanel extends JPanel{
 
 	private Game game;
 	private JLabel[][] boardLabel;
 	private Square[][] board;
-	private JPanel panel;
-
-
-	public BoardGUI(Game game){
+		
+	public BoardPanel(Game game){
 
 		this.game = game;
 		board = game.getBoard();
-		panel = new JPanel();
 		boardLabel = new JLabel[8][8];
 
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
 				boardLabel[i][j] = new JLabel();
 				boardLabel[i][j].setOpaque(true);
-				panel.add(boardLabel[i][j]);
+				add(boardLabel[i][j]);
 			}
 		}
 
-		panel.setLayout(new GridLayout(8,8,-1,-1));
-		add(panel);
+		setLayout(new GridLayout(8,8,-1,-1));
 
 		resetBoard();
 		addMouseListener(new BoardListener());
@@ -40,8 +36,11 @@ public class BoardGUI extends JFrame{
 		Player p1 = new Player("joao");
 		Player p2 = new Player("jose");
 		Game game = new Game(p1, p2);
-		BoardGUI app = new BoardGUI(game);
+		BoardPanel board = new BoardPanel(game);
 
+		JFrame app = new JFrame("Chess");
+
+		app.add(board);
 		app.setSize(900,600);
 		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		app.setVisible(true);
