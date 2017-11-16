@@ -59,7 +59,7 @@ public class Game{
 
 	public void movePiece(int row1, int col1, int row2, int col2){
 		Piece moving = board[row1][col1].getPiece();
-		
+		moving.moved();
 
 		board[row2][col2].setPiece(moving);
 		board[row1][col1].setPiece(null);

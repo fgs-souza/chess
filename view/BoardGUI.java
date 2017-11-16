@@ -19,8 +19,6 @@ public class BoardGUI extends JFrame{
 		board = game.getBoard();
 		panel = new JPanel();
 		boardLabel = new JLabel[8][8];
-		//JLabel xadrez = new JLabel("Xadrez:");
-		//frame.add(xadrez);
 
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
@@ -52,10 +50,6 @@ public class BoardGUI extends JFrame{
 
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j<8; j++){
-
-				final int row = i;
-				final int col = j;
-
 
 				if(i%2 == 0 ^ j % 2 == 0){
 					boardLabel[i][j].setBackground(Color.GRAY);
@@ -125,31 +119,28 @@ public class BoardGUI extends JFrame{
 
 	    public void mouseClicked(MouseEvent e) {
 
+			
 			if(board[row][col].isEmpty())
 				return;
 
-
+			
 			Piece peca = board[row][col].getPiece();
 
+			resetBoard();
 
 		   	for(int a = 0; a < 8; a++){
 
 		   		for(int b = 0; b < 8; b++){
 
-		   			final int row2 = a;
-		   			final int col2 = b;
+		       		if(peca.canMove(row,col,a,b,board) && peca.getTeam() == game.getCurrentTeam()){
 
-		   			if(boardLabel[a][b].getBackground() == Color.GREEN){
+		       			boardLabel[a][b].setBackground(Color.GREEN);
 
-		       		}else{
-		       			if(peca.canMove(row,col,a,b,board) && peca.getTeam() == game.getCurrentTeam()){
+		       			for(MouseListener al : boardLabel[a][b].getMouseListeners())
+		       				boardLabel[a][b].removeMouseListener(al);
 
-		       				boardLabel[a][b].setBackground(Color.GREEN);
-
-		       				boardLabel[a][b].addMouseListener(new ListenerVerde(row,col,a,b));
-
-		       			}
 		       		}
+		       		
 
 		   		}
 		   	}	
@@ -192,13 +183,13 @@ public class BoardGUI extends JFrame{
 			if(board[row1][col1].isEmpty())
 				return;
 
-
+		
 			Piece peca = board[row1][col1].getPiece();
 
 			game.movePiece(row1,col1,row2,col2);
+			game.nextTurn();
 
 			resetBoard();
-	    	
 
 		}		
 	}

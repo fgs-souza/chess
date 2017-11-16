@@ -16,8 +16,7 @@ public class King extends Piece{
 			return false;
 
 		int rowDiff = Math.abs(rowTarg - rowIni);
-		int colDiff = Math.abs(rowTarg - rowIni);
-
+		int colDiff = Math.abs(colTarg - colIni);
 		if(rowDiff > 1 || colDiff > 1)
 			return false;
 
@@ -32,8 +31,13 @@ public class King extends Piece{
 		for(int row = 0; row < 8; row++){
 			for(int col = 0; col < 8; col++){
 
-				if(board[row][col].containsEnemyPiece(team)){
+				if(board[row][col].containsEnemyPiece(team) && board[row][col].getPiece().getValue() != 1){
 					if(board[row][col].getPiece().canMove(row, col, kingRow, kingCol, board))
+						return true;
+				} else if(board[row][col].containsEnemyPiece(team) && board[row][col].getPiece().getValue() != 1){
+					int direction = board[row][col].getPiece().getTeam() == 0 ? 1 : -1;
+
+					if(kingRow == row+1*direction && (kingCol == col-1 || kingCol == col+1))
 						return true;
 				}
 
@@ -72,6 +76,8 @@ public class King extends Piece{
 
 		Square[][] board = game.getBoard();
 
+		game.printBoard();
+		game.movePiece(0,4,4,4);
 		game.printBoard();
 
 		System.out.println("Consegue se mover 1 pra baixo: " + board[4][4].getPiece().canMove(4, 4, 5, 4, board));
