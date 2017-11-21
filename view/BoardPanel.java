@@ -33,9 +33,7 @@ public class BoardPanel extends JPanel{
 
 	public static void main(String[] args){
 
-		Player p1 = new Player("joao");
-		Player p2 = new Player("jose");
-		Game game = new Game(p1, p2);
+		Game game = new Game();
 		BoardPanel board = new BoardPanel(game);
 
 		JFrame app = new JFrame("Chess");

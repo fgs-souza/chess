@@ -4,19 +4,14 @@ import control.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class InitialPanel extends JPanel{
 
 
-	public InitialPanel(){
+	public InitialPanel(ActionListener handler){
 
-		setLayout(new BorderLayout());
-
-		JPanel greetings = new JPanel();
-
-		greetings.add(new JLabel("Bem vindo! Selecione abaixo os jogadores, ou cadastre novos."));
-		
-		add(greetings, BorderLayout.NORTH);
+		setLayout(new GridLayout(2,2));
 
 		JPanel selectPlayers = new JPanel();
 
@@ -25,17 +20,13 @@ public class InitialPanel extends JPanel{
 		selectPlayers.add(new JLabel("Jogador 2 (peças pretas):"));
 		selectPlayers.add(new JTextField(20));
 
-		add(selectPlayers,BorderLayout.CENTER);
+		JButton startGame = new JButton("Começar");
+
+		add(selectPlayers);
+		add(startGame);
+
+		startGame.addActionListener(handler);
 
 		
 	}
-
-	public static void main(String[] args){
-		JFrame app = new JFrame("xd");
-		app.setSize(600,300);
-		app.setVisible(true);
-		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		app.add(new InitialPanel());
-	}
-
 }

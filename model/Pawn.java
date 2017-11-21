@@ -46,33 +46,4 @@ public class Pawn extends Piece{
 		return true;
 	}
 
-
-	public static void main(String[] args){
-		Player p1 = new Player("");
-		Player p2= new Player("");
-		
-		
-		Game game = new Game(p1,p2);
-
-		Square[][] board = game.getBoard();
-
-		System.out.println("tests: ");
-
-		System.out.println("Consegue se mover 2 para frente no primeiro turno: " + board[1][0].getPiece().canMove(1, 0, 3, 0, board));
-		game.movePiece(1, 0, 3, 0);
-		game.printBoard();
-		System.out.println("Consegue se mover 2 para frente no segundo turno: " + board[3][0].getPiece().canMove(3, 0, 5, 0, board));
-		System.out.println("Consegue se mover 1 para frente normalmente: " + board[3][0].getPiece().canMove(3, 0, 4, 0, board));
-		game.movePiece(3, 0, 5, 0);
-		game.printBoard();
-		System.out.println("Consegue capturar andando para frente: " + board[5][0].getPiece().canMove(5, 0, 6, 0, board));
-		System.out.println("Consegue capturar na diagonal: " + board[5][0].getPiece().canMove(5, 0, 6, 1, board));
-		game.movePiece(5, 0, 4, 4);
-		game.printBoard();
-		System.out.println("Consegue andar na diagonal sem captura: " + board[4][4].getPiece().canMove(4, 4, 5, 5, board));
-		System.out.println("Consegue capturar em coluna muito longe: " + board[4][4].getPiece().canMove(5, 0, 6, 2, board));
-		System.out.println("Consegue movimento aleatorio: " + board[4][4].getPiece().canMove(5, 0, 4, 3, board));
-
-
-	}
 }

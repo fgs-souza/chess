@@ -1,18 +1,18 @@
 package model;
 import java.util.Arrays;
 
+import control.*;
+
 public class Game{
 
 	private Square[][] board;
-	private int currentTeam ;
-	private Player playerWhite;
-	private Player playerBlack;
+	private int currentTeam;
+	private boolean isOver;
 
-	public Game(Player playerWhite, Player playerBlack){
+	public Game(){
 
+		isOver = false;
 		board = new Square[8][8];
-		this.playerWhite = playerWhite;
-		this.playerBlack = playerBlack;
 		currentTeam = 0;
 
 		for(int row = 0; row < 8; row++){
@@ -55,11 +55,6 @@ public class Game{
 		}
 	}
 
-	public Game(){
-
-		this(new Player("Default p1"), new Player("Default p2"));
-	}
-
 	public Square[][] getBoard(){
 		return board;
 	}
@@ -72,54 +67,19 @@ public class Game{
 		Piece moving = board[row1][col1].getPiece();
 		moving.moved();
 
+		if(!board[row2][col2].isEmpty()){
+			if(board[row2][col2].getPiece().getValue() == 100){
+				GameControl.endGame();
+			}
+		}
+
 		board[row2][col2].setPiece(moving);
 		board[row1][col1].setPiece(null);
 		currentTeam = (currentTeam+1) % 2;
 	}
 
-	public int status(){ // Retorna -1 se o jogo ainda não acabou, 0 se acabou e o time branco venceu, 
-						 // 1 se acabou e o time preto venceu, ((2 se acabou em empate)) - a ser implementado.
-/*
-		boolean whiteHasKing = false;
-		boolean blackHasKing = false;
-
-		for(int row = 0; row < 8; row++){
-			for(int col = 0; col < 8; col++){
-
-				if(!board[row][col].isEmpty()){
-
-					Piece piece = board[row][col].getPiece();
-
-					if(piece.getValue() == 100){
-
-					int pieceTeam = piece.getTeam();
-
-					if(pieceTeam == 0)
-						whiteHasKing = true;
-					else if(pieceTeam == 1)
-						blackHasKing = true;
-
-
-					if(piece.isCheckmated(row, col, board))
-						return (piece.getTeam() + 1) %2;
-					}
-				}
-			}
-		}
-
-		if(!whiteHasKing){
-			playerWhite.won();
-			playerBlack.lost();
-			return 1;
-		}
-
-		if(!blackHasKing){
-			playerWhite.lost();
-			playerBlack.won();
-			return 0;
-		}
-*/
-		return -1;
+	public boolean isOver(){
+		return isOver;
 	}
 
 }

@@ -8,11 +8,9 @@ public class GameFrame extends JFrame{
 	Game game;
 	BoardPanel boardPanel;
 
-	public GameFrame(Game game){
-
+	public GameFrame(){
+		game = new Game();
 		boardPanel = new BoardPanel(game);
-
-		this.game = game;
 
 		setSize(900,600);
 		setTitle("Chess");
@@ -38,8 +36,7 @@ public class GameFrame extends JFrame{
 	}
 
 	public static void main(String[] args){
-		Game game = new Game();
-		new GameFrame(game);
+		GameFrame game = new GameFrame();
 	}
 
 }

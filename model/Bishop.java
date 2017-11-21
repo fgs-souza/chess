@@ -65,33 +65,5 @@ public class Bishop extends Piece{
 	}
 
 
-	public static void main(String[] args){
-
-		Player p1 = new Player("joao");
-		Player p2 = new Player("jose");
-
-		Game game = new Game(p1, p2);
-
-		game.printBoard();
-
-		Square[][] board = game.getBoard();
-
-		System.out.println(board[0][2].getPiece().canMove(0,2,2,4,board));
-		game.movePiece(0,2,4,4);
-		game.printBoard();
-		System.out.println("true: " + board[4][4].getPiece().canMove(4,4,2,2,board));
-		System.out.println("false: " + board[4][4].getPiece().canMove(4,4,1,1,board));
-		System.out.println("true: " + board[4][4].getPiece().canMove(4,4,6,6,board));
-		System.out.println("false: " + board[4][4].getPiece().canMove(4,4,7,7,board));
-		System.out.println("false: " + board[4][4].getPiece().canMove(4,4,5,4,board));
-		System.out.println("true: " + board[4][4].getPiece().canMove(4,4,6,2,board));
-		System.out.println("false: " + board[4][4].getPiece().canMove(4,4,7,1,board));
-		game.movePiece(7,2,5,5);
-		game.printBoard();
-		System.out.println("true: " + board[5][5].getPiece().canMove(5,5,4,4,board));
-		System.out.println("true: " + board[4][4].getPiece().canMove(4,4,5,5,board));	
-
-
-	}
 
 }

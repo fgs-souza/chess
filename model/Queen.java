@@ -22,24 +22,4 @@ public class Queen extends Piece{
 		return true;	
 	}
 
-
-	public static void main(String[] args){
-
-
-
-		Game game = new Game(new Player(""), new Player(""));
-
-		Square[][] board = game.getBoard();
-
-		game.printBoard();
-
-		System.out.println("Consegue se mover 1 pra baixo: " + board[4][4].getPiece().canMove(4, 4, 5, 4, board));
-		System.out.println("Consegue se mover 1 pra cima: " + board[4][4].getPiece().canMove(4, 4, 3, 4, board));
-		System.out.println("Consegue se mover 1 pra esquerda: " + board[4][4].getPiece().canMove(4, 4, 4, 3, board));
-		System.out.println("Consegue se mover 1 pra direita: " + board[4][4].getPiece().canMove(4, 4, 4, 5, board));
-		System.out.println("Consegue se mover 2 pra baixo: " + board[4][4].getPiece().canMove(4, 4, 6, 4, board));
-		System.out.println("Consegue se mover 1 pra diagonal: " + board[4][4].getPiece().canMove(4, 4, 5, 5, board));
-		System.out.println("Consegue se mover 4 pra diagonal: " + board[4][4].getPiece().canMove(4, 4, 0, 0, board));
-	}
-
 }

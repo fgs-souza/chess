@@ -66,26 +66,4 @@ public class King extends Piece{
 
 		return true;
 	}
-
-	public static void main(String[] args){
-
-		Player p1 = new Player("");
-		Player p2 = new Player("");
-		
-		Game game = new Game(p1,p2);
-
-		Square[][] board = game.getBoard();
-
-		game.printBoard();
-		game.movePiece(0,4,4,4);
-		game.printBoard();
-
-		System.out.println("Consegue se mover 1 pra baixo: " + board[4][4].getPiece().canMove(4, 4, 5, 4, board));
-		System.out.println("Consegue se mover 1 pra cima: " + board[4][4].getPiece().canMove(4, 4, 3, 4, board));
-		System.out.println("Consegue se mover 1 pra esquerda: " + board[4][4].getPiece().canMove(4, 4, 4, 3, board));
-		System.out.println("Consegue se mover 1 pra direita: " + board[4][4].getPiece().canMove(4, 4, 4, 5, board));
-		System.out.println("Consegue se mover 2 pra baixo: " + board[4][4].getPiece().canMove(4, 4, 6, 4, board));
-		System.out.println("Consegue se mover 1 pra diagonal: " + board[4][4].getPiece().canMove(4, 4, 5, 5, board));
-		System.out.println("Consegue se mover 2 pra diagonal: " + board[4][4].getPiece().canMove(4, 4, 2, 2, board));
-	}
 }

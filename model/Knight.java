@@ -20,27 +20,4 @@ public class Knight extends Piece{
 		return true;	
 	}
 
-
-	public static void main(String[] args){
-
-		Player p1 = new Player("");
-		Player p2 = new Player("");
-		
-
-		Game game = new Game(p1, p2);
-
-		game.printBoard();
-
-		Square[][] board = game.getBoard();
-
-		System.out.println(board[0][1].getPiece().canMove(0,1,2,0,board));
-		System.out.println(board[0][1].getPiece().canMove(0,1,2,2,board));
-		System.out.println(board[0][1].getPiece().canMove(0,1,2,1,board));
-		System.out.println(board[0][1].getPiece().canMove(0,1,1,3,board));
-		game.movePiece(0,1,4,4);
-		game.printBoard();
-		System.out.println(board[4][4].getPiece().canMove(4,4,2,0,board));
-		System.out.println(board[4][4].getPiece().canMove(4,4,6,3,board));
-		System.out.println(board[4][4].getPiece().canMove(4,4,6,5,board));
-	}
 }

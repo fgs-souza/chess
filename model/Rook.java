@@ -43,36 +43,4 @@ public class Rook extends Piece{
 		return true;	
 	}
 
-
-	/*public static void main(String[] args){
-
-		Game game = new Game();
-
-		Square[][] board = game.getBoard();
-
-		game.printBoard();
-		System.out.println(board[7][0].getPiece().canMove(7, 0, 5, 0, board));
-		game.movePiece(6, 0, 4, 4);
-		game.printBoard();	
-		System.out.println(board[7][0].getPiece().canMove(7, 0, 5, 0, board));
-		game.movePiece(4, 4, 4, 0);
-		game.printBoard();
-		System.out.println(board[7][0].getPiece().canMove(7, 0, 5, 0, board));
-		System.out.println(board[7][0].getPiece().canMove(7, 0, 4, 0, board));
-		System.out.println(board[7][0].getPiece().canMove(7, 0, 3, 0, board));
-		game.movePiece(7,0,5,0);
-		game.printBoard();
-		System.out.println(board[5][0].getPiece().canMove(5, 0, 5, 5, board));
-		game.movePiece(4,0,5,3);
-		game.printBoard();
-		System.out.println(board[5][0].getPiece().canMove(5, 0, 5, 7, board));
-		game.movePiece(0,0,3,2);
-		game.movePiece(5,0,3,0);
-		game.movePiece(0,1,3,4);	
-		game.printBoard();
-		System.out.println(board[3][0].getPiece().canMove(3, 0, 3, 2, board));
-		System.out.println(board[3][0].getPiece().canMove(3, 0, 3, 3, board));
-		System.out.println(board[3][0].getPiece().canMove(3, 0, 3, 4, board));
-
-	}*/
 }
