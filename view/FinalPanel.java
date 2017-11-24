@@ -9,11 +9,11 @@ import java.awt.event.*;
 
 public class FinalPanel extends JPanel{
 
-	public FinalPanel(ActionListener handler){
+	public FinalPanel(ActionListener handler, String winner){
 
 		setLayout(new GridLayout(2,2));
 
-		JLabel message = new JLabel("Fim de jogo!");
+		JLabel message = new JLabel("Fim de jogo! " + winner + " venceu.");
 
 		JButton restart = new JButton("Jogar novamente");
 
@@ -22,4 +22,5 @@ public class FinalPanel extends JPanel{
 
 		restart.addActionListener(handler);
 	}
+
 }

@@ -34,8 +34,6 @@ public class Bishop extends Piece{
 
 	private boolean pathContainsPiece(int rowIni, int colIni, int rowTarg, int colTarg, Square[][] board){  // Checa se existe alguma peça no caminho de board[rowIni][colIni]
 																											// até board[rowTarg][colTarg], excludente.
-		if(Math.abs(rowIni-rowTarg) <= 1 && Math.abs(colIni - colTarg) <= 1)
-			return false;							
 		// Determina se o movimento é para cima ou para baixo
 		boolean movingRight = colTarg > colIni;
 		boolean movingDown = rowTarg > rowIni;
@@ -44,8 +42,8 @@ public class Bishop extends Piece{
 		int diagonal = (movingRight ^ movingDown) ? 1 : -1;
 
 		// Determina de que linha à que linha o bispo irá se mover
-		int lower = movingDown ? rowIni+1 : rowIni-1; 
-		int upper = movingDown ? rowTarg-1 : rowTarg+1; 
+		int lower = movingDown ? rowIni+1 : rowTarg+1; 
+		int upper = movingDown ? rowTarg-1 : rowIni-1; 
 
 		// Itera pelas linhas que ele irá se mover e compara a soma/diferença da linha e coluna (baseado na diagonal)
 		// para descobrir se pertence ao caminho do movimento da peça. Se pertencer e possuir uma peça no quadrado, retorna true

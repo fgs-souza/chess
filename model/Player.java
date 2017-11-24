@@ -1,5 +1,5 @@
 package model;
-import java.io.Serializable;
+import java.io.*;
 
 public class Player implements Serializable{
 	
@@ -11,6 +11,22 @@ public class Player implements Serializable{
 		this.wins = 0;
 		this.games = 0;
 		this.name = name;
+	}
+
+	public void serialize(){
+
+		File file = new File("players/" + this.name + ".ser");
+
+		try{
+			FileOutputStream FOS = new FileOutputStream("players/" + this.name + ".ser");
+			ObjectOutputStream OOS = new ObjectOutputStream(FOS);
+			OOS.writeObject(this);
+			OOS.close();
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+
+
 	}
 
 	public int getWins(){
@@ -25,9 +41,18 @@ public class Player implements Serializable{
 		return games - wins;
 	}
 
+	public String getName(){
+		return name;
+	}
+
 	public void won(){
 		wins++;
 		games++;
+	}
+
+	public void setWins(int wins)
+	{
+		this.wins = wins;
 	}
 
 	public void lost(){

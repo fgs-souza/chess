@@ -8,9 +8,13 @@ import java.awt.event.*;
 
 public class GameControl{
 
-	public static JFrame janelaInicial;
-	public static JFrame janelaGame;
-	public static JFrame janelaFinal;
+	private static JFrame janelaInicial;
+	private static JFrame janelaGame;
+	private static JFrame janelaFinal;
+
+	private static Game game;
+	public static Player playerWhite;
+	public static Player playerBlack;
 
 	public static void main(String[] args){
 		firstPanel();	
@@ -19,13 +23,18 @@ public class GameControl{
 
 	public static void startGame(){
 
+		playerWhite.setWins(100);
+
+		System.out.println(playerWhite.getWins() + "" + playerWhite.getGames());
+		System.out.println(playerBlack.getLosses());
+
 		janelaInicial.setVisible(false);
-		Game game = new Game();
+		game = new Game();
 		BoardPanel boardPanel = new BoardPanel(game);
 		janelaGame = new JFrame();
-		janelaGame.setVisible(true);
 		janelaGame.add(boardPanel);
 		janelaGame.setSize(800,600);
+		janelaGame.setVisible(true);
 		
 
 	}
@@ -33,27 +42,47 @@ public class GameControl{
 	public static void firstPanel(){
 
 		janelaInicial = new JFrame();
-		janelaInicial.setVisible(true);
 		janelaInicial.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		janelaInicial.setLayout(new BorderLayout());
 		janelaInicial.setSize(600,300);
 
-
 		InitialPanel IP = new InitialPanel(new startHandler());
 		janelaInicial.add(IP, BorderLayout.CENTER);
+		janelaInicial.setVisible(true);
 	}
 
 	public static void endGame(){
 
+		int winner = game.getWinner();
+		String winnerString = "";
+
+		if(winner == 0){
+			playerWhite.won();
+			playerBlack.lost();
+			winnerString = playerWhite.getName();
+		} else{
+			playerWhite.lost();
+			playerBlack.won();
+			winnerString = playerBlack.getName();
+		}
+
+		System.out.println(playerWhite.getWins() + "" + playerWhite.getGames());
+		System.out.println(playerBlack.getLosses());
+
+		playerWhite.serialize();
+		playerBlack.serialize();
+
+		System.out.println(playerWhite.getWins() + "" + playerWhite.getGames());
+		System.out.println(playerBlack.getLosses());
+
 		janelaGame.setEnabled(false);
 		janelaFinal = new JFrame();
-		janelaFinal.setVisible(true);
 		janelaFinal.setSize(400,200);
 		janelaFinal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		janelaFinal.add(new FinalPanel(new restartHandler()));
+		janelaFinal.add(new FinalPanel(new restartHandler(),winnerString));
+		janelaFinal.setVisible(true);
 
 	}
-
 
 
 	public static class startHandler implements ActionListener{

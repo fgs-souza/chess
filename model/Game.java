@@ -7,11 +7,10 @@ public class Game{
 
 	private Square[][] board;
 	private int currentTeam;
-	private boolean isOver;
+	int winner;
 
 	public Game(){
 
-		isOver = false;
 		board = new Square[8][8];
 		currentTeam = 0;
 
@@ -69,6 +68,7 @@ public class Game{
 
 		if(!board[row2][col2].isEmpty()){
 			if(board[row2][col2].getPiece().getValue() == 100){
+				winner = moving.getTeam();
 				GameControl.endGame();
 			}
 		}
@@ -78,8 +78,8 @@ public class Game{
 		currentTeam = (currentTeam+1) % 2;
 	}
 
-	public boolean isOver(){
-		return isOver;
+	public int getWinner(){
+		return winner;
 	}
 
 }
