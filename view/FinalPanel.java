@@ -11,16 +11,23 @@ public class FinalPanel extends JPanel{
 
 	public FinalPanel(ActionListener handler, String winner){
 
-		setLayout(new GridLayout(2,2));
+		setLayout(new BorderLayout());
 
-		JLabel message = new JLabel("Fim de jogo! " + winner + " venceu.");
+		JPanel buttonPanel = new JPanel();
 
 		JButton restart = new JButton("Jogar novamente");
 
-		add(message);
-		add(restart);
-
 		restart.addActionListener(handler);
+		buttonPanel.add(restart);
+
+		JPanel messagePanel = new JPanel();
+
+		JLabel message = new JLabel("Fim de jogo! " + winner + " venceu.");
+
+		messagePanel.add(message);
+
+		add(messagePanel, BorderLayout.NORTH);
+		add(buttonPanel, BorderLayout.CENTER);
 	}
 
 }

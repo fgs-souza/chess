@@ -60,26 +60,26 @@ public class BoardPanel extends JPanel{
 
 					switch(board[i][j].getPiece().getValue()){
 						case 1:
-							boardLabel[i][j].setText("P");
+							boardLabel[i][j].setIcon(new ImageIcon(new ImageIcon("icons/" + board[i][j].getPiece().getTeam() + "pawn.png").getImage().getScaledInstance(67, 70, Image.SCALE_DEFAULT)));
 							break;
 						case 3:
-							boardLabel[i][j].setText("B");
+							boardLabel[i][j].setIcon(new ImageIcon(new ImageIcon("icons/" + board[i][j].getPiece().getTeam() + "bishop.png").getImage().getScaledInstance(67, 70, Image.SCALE_DEFAULT)));
 							break;
 						case 4:
-							boardLabel[i][j].setText("C");
+							boardLabel[i][j].setIcon(new ImageIcon(new ImageIcon("icons/" + board[i][j].getPiece().getTeam() + "knight.png").getImage().getScaledInstance(67, 70, Image.SCALE_DEFAULT)));
 							break;
 						case 5:
-							boardLabel[i][j].setText("R");
+							boardLabel[i][j].setIcon(new ImageIcon(new ImageIcon("icons/" + board[i][j].getPiece().getTeam() + "rook.png").getImage().getScaledInstance(67, 70, Image.SCALE_DEFAULT)));
 							break;
 						case 10:
-							boardLabel[i][j].setText("Q");
+							boardLabel[i][j].setIcon(new ImageIcon(new ImageIcon("icons/" + board[i][j].getPiece().getTeam() + "queen.png").getImage().getScaledInstance(67, 70, Image.SCALE_DEFAULT)));
 							break;
 						case 100:
-							boardLabel[i][j].setText("K");
+							boardLabel[i][j].setIcon(new ImageIcon(new ImageIcon("icons/" + board[i][j].getPiece().getTeam() + "king.png").getImage().getScaledInstance(67, 70, Image.SCALE_DEFAULT)));
 							break;
 					}
 				} else{
-					boardLabel[i][j].setText("");
+					boardLabel[i][j].setIcon(null);
 				}
 
 			}

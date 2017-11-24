@@ -70,6 +70,15 @@ public class Game{
 			if(board[row2][col2].getPiece().getValue() == 100){
 				winner = moving.getTeam();
 				GameControl.endGame();
+			} else if(moving.getValue() == 1){
+
+				if(moving.getTeam() == 0 && row2 == 7 || moving.getTeam() == 1 && row2 == 0){
+
+
+					board[row1][col1].setPiece(null);
+					board[row2][col2].setPiece(new Queen(moving.getTeam()));
+					return;
+				}
 			}
 		}
 

@@ -23,16 +23,16 @@ public class GameControl{
 
 	public static void startGame(){
 
-		playerWhite.setWins(100);
 
-		System.out.println(playerWhite.getWins() + "" + playerWhite.getGames());
-		System.out.println(playerBlack.getLosses());
+		System.out.println(playerWhite.getName() + ": Wins: " + playerWhite.getWins() + " Games: " + playerWhite.getGames());
+		System.out.println(playerBlack.getName() + ": Wins: " + playerBlack.getWins() + " Games: " + playerBlack.getGames());
 
 		janelaInicial.setVisible(false);
 		game = new Game();
 		BoardPanel boardPanel = new BoardPanel(game);
-		janelaGame = new JFrame();
+		janelaGame = new JFrame("Xadrez: " + playerWhite.getName() + " vs " + playerBlack.getName());
 		janelaGame.add(boardPanel);
+		janelaGame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		janelaGame.setSize(800,600);
 		janelaGame.setVisible(true);
 		
@@ -41,10 +41,10 @@ public class GameControl{
 
 	public static void firstPanel(){
 
-		janelaInicial = new JFrame();
+		janelaInicial = new JFrame("Xadrez");
 		janelaInicial.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		janelaInicial.setLayout(new BorderLayout());
-		janelaInicial.setSize(600,300);
+		janelaInicial.setSize(800,150);
 
 		InitialPanel IP = new InitialPanel(new startHandler());
 		janelaInicial.add(IP, BorderLayout.CENTER);
@@ -66,17 +66,11 @@ public class GameControl{
 			winnerString = playerBlack.getName();
 		}
 
-		System.out.println(playerWhite.getWins() + "" + playerWhite.getGames());
-		System.out.println(playerBlack.getLosses());
-
 		playerWhite.serialize();
 		playerBlack.serialize();
 
-		System.out.println(playerWhite.getWins() + "" + playerWhite.getGames());
-		System.out.println(playerBlack.getLosses());
-
 		janelaGame.setEnabled(false);
-		janelaFinal = new JFrame();
+		janelaFinal = new JFrame("Xadrez");
 		janelaFinal.setSize(400,200);
 		janelaFinal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		janelaFinal.add(new FinalPanel(new restartHandler(),winnerString));

@@ -26,6 +26,11 @@ public class InitialPanel extends JPanel{
 		selectWhite = new JComboBox<String>(nomes);
 		selectBlack = new JComboBox<String>(nomes);
 
+		JPanel greetings = new JPanel();
+
+		greetings.add(new JLabel("Bem vindo! Selecione os jogadores que irão jogar ou cadastre novos nos botões abaixo: "));
+		add(greetings, BorderLayout.NORTH);
+
 		selectPlayers.add(new JLabel("Jogador 1 (peças brancas):"));
 		selectPlayers.add(selectWhite);
 		selectPlayers.add(new JLabel("Jogador 2 (peças pretas):"));
@@ -38,9 +43,14 @@ public class InitialPanel extends JPanel{
 		cadastrarJogadores.setSize(100,200);
 		cadastrarJogadores.addActionListener(new CadastroHandler());
 
+		JButton mostrarRanking = new JButton("Ver cadastrados");
+		mostrarRanking.setSize(100,200);
+		mostrarRanking.addActionListener(new RankingHandler());
+
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.add(startGame);
 		buttonPanel.add(cadastrarJogadores);
+		buttonPanel.add(mostrarRanking);
 
 		add(selectPlayers, BorderLayout.CENTER);
 		add(buttonPanel, BorderLayout.SOUTH);
@@ -68,27 +78,46 @@ public class InitialPanel extends JPanel{
 			String nome = JOptionPane.showInputDialog(null, "Digite o nome do novo jogador: ");
 
 			Player cadastro = new Player(nome);
-			
+
+
 			File[] files = new File("players/").listFiles();
+
 			for(File file : files){
 				if(file.getName().equals(nome + ".ser")){
 					JOptionPane.showMessageDialog(null, "Já existe um jogador com esse nome!");
 					return;
 				}
-
 			}
-			
+
 			JOptionPane.showMessageDialog(null, "Jogador cadastrado com sucesso!");
+			cadastro.serialize();
+			registeredPlayers.add(cadastro);
 
-			selectWhite.addItem(nome);
-			selectBlack.addItem(nome);
-
-			loadPlayers();
+			selectWhite.insertItemAt(nome, selectWhite.getItemCount());
+			selectBlack.insertItemAt(nome, selectBlack.getItemCount());
 		}
 	}
 
+	public class RankingHandler implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent event){
+
+			String ranking = "";
+
+			for(Player player : registeredPlayers){
+				ranking += player.getName() + "\n         Vitórias: " + player.getWins() + "\n         Jogos: " + player.getGames() + "\n";
+			}
+
+
+			JOptionPane.showMessageDialog(null, ranking);
+
+		}
+	}
 
 	public void loadPlayers(){
+
+		registeredPlayers.clear();
 
 		File[] files = new File("players/").listFiles();
 
@@ -114,6 +143,7 @@ public class InitialPanel extends JPanel{
 		for(int i = 0; i < nomes.length; i++){
 			nomes[i] = registeredPlayers.get(i).getName();
 		}
+
 
 
 
