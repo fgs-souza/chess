@@ -13,18 +13,16 @@ public class Player implements Serializable{
 		this.name = name;
 	}
 
-	public void serialize(){
+	public void serialize() throws IOException{
 
 		File file = new File("players/" + this.name + ".ser");
 
-		try{
-			FileOutputStream FOS = new FileOutputStream("players/" + this.name + ".ser");
-			ObjectOutputStream OOS = new ObjectOutputStream(FOS);
-			OOS.writeObject(this);
-			OOS.close();
-		}catch(IOException e){
-			e.printStackTrace();
-		}
+
+		FileOutputStream FOS = new FileOutputStream("players/" + this.name + ".ser");
+		ObjectOutputStream OOS = new ObjectOutputStream(FOS);
+		OOS.writeObject(this);
+		OOS.close();
+
 
 
 	}

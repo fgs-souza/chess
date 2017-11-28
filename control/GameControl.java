@@ -3,6 +3,7 @@ package control;
 import model.*;
 import view.*;
 import java.awt.*;
+import java.io.*;
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -22,10 +23,6 @@ public class GameControl{
 	}
 
 	public static void startGame(){
-
-
-		System.out.println(playerWhite.getName() + ": Wins: " + playerWhite.getWins() + " Games: " + playerWhite.getGames());
-		System.out.println(playerBlack.getName() + ": Wins: " + playerBlack.getWins() + " Games: " + playerBlack.getGames());
 
 		janelaInicial.setVisible(false);
 		game = new Game();
@@ -66,8 +63,12 @@ public class GameControl{
 			winnerString = playerBlack.getName();
 		}
 
-		playerWhite.serialize();
-		playerBlack.serialize();
+		try{
+			playerWhite.serialize();
+			playerBlack.serialize();
+		}catch(IOException e){
+			JOptionPane.showMessageDialog(janelaInicial, "Erro IO ao atualizar as vitórias dos jogadores!");
+		}
 
 		janelaGame.setEnabled(false);
 		janelaFinal = new JFrame("Xadrez");
@@ -83,6 +84,12 @@ public class GameControl{
 
 		@Override
 		public void actionPerformed(ActionEvent event){
+
+			if(playerWhite == playerBlack){
+				JOptionPane.showMessageDialog(janelaInicial, "Os dois jogadores devem ser diferentes!");
+				return;
+			}
+
 			startGame();
 		}
 	}

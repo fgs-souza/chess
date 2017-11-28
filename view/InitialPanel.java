@@ -71,50 +71,6 @@ public class InitialPanel extends JPanel{
 	}
 
 
-	public class CadastroHandler implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent event){
-			String nome = JOptionPane.showInputDialog(null, "Digite o nome do novo jogador: ");
-
-			Player cadastro = new Player(nome);
-
-
-			File[] files = new File("players/").listFiles();
-
-			for(File file : files){
-				if(file.getName().equals(nome + ".ser")){
-					JOptionPane.showMessageDialog(null, "Já existe um jogador com esse nome!");
-					return;
-				}
-			}
-
-			JOptionPane.showMessageDialog(null, "Jogador cadastrado com sucesso!");
-			cadastro.serialize();
-			registeredPlayers.add(cadastro);
-
-			selectWhite.insertItemAt(nome, selectWhite.getItemCount());
-			selectBlack.insertItemAt(nome, selectBlack.getItemCount());
-		}
-	}
-
-	public class RankingHandler implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent event){
-
-			String ranking = "";
-
-			for(Player player : registeredPlayers){
-				ranking += player.getName() + "\n         Vitórias: " + player.getWins() + "\n         Jogos: " + player.getGames() + "\n";
-			}
-
-
-			JOptionPane.showMessageDialog(null, ranking);
-
-		}
-	}
-
 	public void loadPlayers(){
 
 		registeredPlayers.clear();
@@ -145,8 +101,60 @@ public class InitialPanel extends JPanel{
 		}
 
 
-
-
-
 	}
+
+
+	public class CadastroHandler implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent event){
+			String nome = JOptionPane.showInputDialog(null, "Digite o nome do novo jogador: ");
+
+			if(nome == null){
+				return;
+			}
+
+			Player cadastro = new Player(nome);
+
+
+			File[] files = new File("players/").listFiles();
+
+			for(File file : files){
+				if(file.getName().equals(nome + ".ser")){
+					JOptionPane.showMessageDialog(null, "Já existe um jogador com esse nome!");
+					return;
+				}
+			}
+
+
+			try{
+				cadastro.serialize();	
+				JOptionPane.showMessageDialog(null, "Jogador cadastrado com sucesso!");
+				registeredPlayers.add(cadastro);
+			}catch(IOException e){
+				JOptionPane.showMessageDialog(null, "Erro IO ao cadastrar jogador. Tente novamente.");
+			}
+
+			selectWhite.insertItemAt(nome, selectWhite.getItemCount());
+			selectBlack.insertItemAt(nome, selectBlack.getItemCount());
+		}
+	}
+
+	public class RankingHandler implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent event){
+
+			String ranking = "";
+
+			for(Player player : registeredPlayers){
+				ranking += player.getName() + "\n         Vitórias: " + player.getWins() + "\n         Jogos: " + player.getGames() + "\n";
+			}
+
+
+			JOptionPane.showMessageDialog(null, ranking);
+
+		}
+	}
+
 }
